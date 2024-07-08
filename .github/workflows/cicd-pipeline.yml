@@ -44,7 +44,7 @@ jobs:
           path: dist
       - name: Show filename
         id: my-step-id
-        run: find dist/assets/*.js -type f -execdir echo 'my-output-param={}' >> $GITHUB_OUTPUT';'
+        run: find dist/assets/*.js -type f -execdir echo 'my-output-param={}' >> $GITHUB_OUTPUT ';'
       - name: List the files
         run: ls
       - name: Show Output param
