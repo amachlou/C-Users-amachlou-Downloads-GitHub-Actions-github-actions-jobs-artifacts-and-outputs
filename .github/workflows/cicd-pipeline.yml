@@ -1,4 +1,4 @@
-name: Prepare & Deploy website
+name: Prepare & Deploy
 on:
   workflow_dispatch:
   push:
