@@ -36,10 +36,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download The Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/download-artifact@v3
         with:
           name: the_artifact
           path: dist
+      - name: Show filename
+        run: find dist/assets/*.js -type f -execdir echo '{}' ';'
       - name: Output the list of the files
         run: ls
       - name: Deploy
