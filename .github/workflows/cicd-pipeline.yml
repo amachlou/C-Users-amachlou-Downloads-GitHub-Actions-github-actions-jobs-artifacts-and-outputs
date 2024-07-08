@@ -1,9 +1,9 @@
 name: Prepare & Deploy website
 on:
-  workflow_dispatch
-  # push:
-  #   branches:
-  #     - main
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -34,6 +34,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      my-output-param: ${{ steps.my-step-id.outputs.my-step-id }}
     steps:
       - name: Download The Artifact
         uses: actions/download-artifact@v3
@@ -41,8 +43,11 @@ jobs:
           name: the_artifact
           path: dist
       - name: Show filename
-        run: find dist/assets/*.js -type f -execdir echo '{}' ';'
-      - name: Output the list of the files
+        id: my-step-id
+        run: find dist/assets/*.js -type f -execdir echo 'my-output-param={}' >> $GITHUB_OUTPUT';'
+      - name: List the files
         run: ls
+      - name: Show Output param
+        run: echo "${{ needs.build.outputs.my-output-param }}"
       - name: Deploy
         run: echo "Deploying..."
