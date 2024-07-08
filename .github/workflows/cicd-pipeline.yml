@@ -35,7 +35,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     outputs:
-      my-output-param: ${{ steps.my-step-id.outputs.my-step-id }}
+      my-output-param: ${{ steps.my-step-id.outputs.my-output-param }}
     steps:
       - name: Download The Artifact
         uses: actions/download-artifact@v3
