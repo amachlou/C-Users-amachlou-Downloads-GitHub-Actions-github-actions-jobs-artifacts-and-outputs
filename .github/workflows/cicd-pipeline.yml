@@ -10,6 +10,14 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+
+        # Using cache to cache dependencies
+        # key: Should be unuique
+      - name: Dependency Caching
+        uses: actions/cache
+        with:
+          path: ~/.npm
+          key: my-dependencies-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Lint code
@@ -24,6 +32,11 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Dependency Caching
+        uses: actions/cache
+        with:
+          path: ~/.npm
+          key: my-dependencies-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
       - name: Build website
