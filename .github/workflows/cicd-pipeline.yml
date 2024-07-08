@@ -48,6 +48,6 @@ jobs:
       - name: List the files
         run: ls
       - name: Show Output param
-        run: echo "Result -> ${{ needs.build.outputs.my-output-param }}"
+        run: echo 'Result -> ${{ needs.build.outputs.my-output-param }}'
       - name: Deploy
         run: echo "Deploying..."
