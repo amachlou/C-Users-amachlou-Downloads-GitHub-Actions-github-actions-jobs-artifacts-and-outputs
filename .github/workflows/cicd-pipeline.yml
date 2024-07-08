@@ -28,6 +28,9 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      - name: Show filename
+        id: my-step-id
+        run: find dist/assets/*.js -type f -execdir echo 'my-output-param={}' >> $GITHUB_OUTPUT ';'
       - name: Upload the artifact
         uses: actions/upload-artifact@v3
         with:
@@ -42,9 +45,6 @@ jobs:
         with:
           name: the_artifact
           path: dist
-      - name: Show filename
-        id: my-step-id
-        run: find dist/assets/*.js -type f -execdir echo 'my-output-param={}' >> $GITHUB_OUTPUT ';'
       - name: List the files
         run: ls
       - name: Show Output param
